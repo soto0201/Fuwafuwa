@@ -60,11 +60,11 @@ onMount(async () => {
 		);
 	}
 
-    if (users.length > 0) {
-	    filteredPosts = filteredPosts.filter(
-            (post) => users.some((user) => post.slug.startsWith(`${user}/`))
-        );
-    }
+	if (users.length > 0) {
+		filteredPosts = filteredPosts.filter((post) =>
+			users.some((user) => post.slug.startsWith(`${user}/`)),
+		);
+	}
 
 	if (uncategorized) {
 		filteredPosts = filteredPosts.filter((post) => !post.data.category);
