@@ -1,0 +1,23 @@
+---
+import Markdown from "@components/misc/Markdown.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getTopDirectories } from "../utils/content-utils.ts";
+
+const topDirs = getTopDirectories();
+---
+
+<MainGridLayout title="Users">
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <ul>
+                    {topDirs.map(user => (
+                        <li><a href={`/archive/?user=${user}`}>{user}</a></li>
+                    ))}
+                </ul>
+            </Markdown>
+        </div>
+    </div>
+
+</MainGridLayout>
+

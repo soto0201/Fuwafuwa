@@ -7,10 +7,12 @@ import { getPostUrlBySlug } from "../utils/url-utils";
 
 export let tags: string[];
 export let categories: string[];
+export let users: string[];
 export let sortedPosts: Post[] = [];
 
 const params = new URLSearchParams(window.location.search);
 tags = params.has("tag") ? params.getAll("tag") : [];
+users = params.has("user") ? params.getAll("user") : [];
 categories = params.has("category") ? params.getAll("category") : [];
 const uncategorized = params.get("uncategorized");
 
@@ -55,6 +57,12 @@ onMount(async () => {
 	if (categories.length > 0) {
 		filteredPosts = filteredPosts.filter(
 			(post) => post.data.category && categories.includes(post.data.category),
+		);
+	}
+
+	if (users.length > 0) {
+		filteredPosts = filteredPosts.filter((post) =>
+			users.some((user) => post.slug.startsWith(`${user}/`)),
 		);
 	}
 

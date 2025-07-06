@@ -92,3 +92,22 @@ export async function getCategoryList(): Promise<Category[]> {
 	}
 	return ret;
 }
+
+export function getTopDirectories() {
+	const allMarkdownFiles = import.meta.glob("/src/content/**/*.md", {
+		as: "raw",
+		eager: true,
+	});
+	const topDirs = new Set<string>();
+
+	for (const filePath in allMarkdownFiles) {
+		const parts = filePath.split("/").filter(Boolean);
+		const contentIndex = parts.indexOf("posts");
+
+		if (contentIndex >= 0 && parts.length > contentIndex + 2) {
+			topDirs.add(parts[contentIndex + 1]);
+		}
+	}
+
+	return Array.from(topDirs);
+}
