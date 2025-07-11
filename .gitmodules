@@ -1,3 +1,3 @@
 [submodule "src/content/posts/soto"]
 	path = src/content/posts/soto
-	url = git@github.com:soto0201/blog-posts.git
+	url = https://github.com/soto0201/blog-posts.git
